@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nget", "nget\nget.csproj", "{C8A0378C-381F-4D59-85E8-8EB401F9325D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nget.core", "nget.core\nget.core.csproj", "{01D71470-C627-4E61-BBF1-D301CB427C8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nget.specs", "nget.specs\nget.specs.csproj", "{51E9C548-0CDB-4588-9E4C-BBFC5E7C3182}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8A0378C-381F-4D59-85E8-8EB401F9325D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A0378C-381F-4D59-85E8-8EB401F9325D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A0378C-381F-4D59-85E8-8EB401F9325D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A0378C-381F-4D59-85E8-8EB401F9325D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D71470-C627-4E61-BBF1-D301CB427C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D71470-C627-4E61-BBF1-D301CB427C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D71470-C627-4E61-BBF1-D301CB427C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D71470-C627-4E61-BBF1-D301CB427C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E9C548-0CDB-4588-9E4C-BBFC5E7C3182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E9C548-0CDB-4588-9E4C-BBFC5E7C3182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E9C548-0CDB-4588-9E4C-BBFC5E7C3182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E9C548-0CDB-4588-9E4C-BBFC5E7C3182}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
