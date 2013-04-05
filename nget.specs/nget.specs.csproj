@@ -61,9 +61,9 @@
   <ItemGroup>
     <Compile Include="CredServicesSpecs\CredentialServicesSpecs.cs" />
     <Compile Include="FileDownloaderSpecs.cs" />
-    <Compile Include="FileNameDeriver_FilenameFromUrlSpecs.cs" />
-    <Compile Include="FileNameDeriver_GenerateTemporaryFile.cs" />
-    <Compile Include="FileNameDeriver_IncrementFileNameSpecs.cs" />
+    <Compile Include="FileNameSpecs\FileNameDeriver_FilenameFromUrlSpecs.cs" />
+    <Compile Include="FileNameSpecs\FileNameDeriver_GenerateTemporaryFile.cs" />
+    <Compile Include="FileNameSpecs\FileNameDeriver_IncrementFileNameSpecs.cs" />
     <Compile Include="HttpRetryServiceSpecs\When_the_retry_quota_is_reached.cs" />
     <Compile Include="HttpRetryServiceSpecs\With_an_error_that_should_not_be_retried.cs" />
     <Compile Include="HttpRetryServiceSpecs\With_a_retry_and_delay_service.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="S3Specs\S3UrlSpecs.cs" />
     <Compile Include="TestDoubles\FakeFileSystem.cs" />
     <Compile Include="TestDoubles\FakeStream.cs" />
+    <Compile Include="UtilSpecs\UrlExpanderSpecs.cs" />
     <Compile Include="With_an_automocked.cs" />
     <Compile Include="With_a_FakeFileSystem.cs" />
   </ItemGroup>

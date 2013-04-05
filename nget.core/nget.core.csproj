@@ -66,6 +66,7 @@
     <Compile Include="Utils\IDataProtectionService.cs" />
     <Compile Include="Utils\IDelayService.cs" />
     <Compile Include="Utils\ProtectedAwsCredentials.cs" />
+    <Compile Include="Utils\UrlExpander.cs" />
     <Compile Include="Web\FileDownloader.cs" />
     <Compile Include="Web\FetchClientFactory.cs" />
     <Compile Include="Web\HttpRetryService.cs" />

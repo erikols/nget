@@ -1,9 +1,8 @@
-﻿using Machine.Specifications;
+using Machine.Specifications;
 using PS.Utilities.Specs;
-using nget.core;
 using nget.core.FileName;
 
-namespace nget.specs
+namespace nget.specs.FileNameSpecs
 {
     [Subject(typeof(FileNameDeriver))]
     public class When_incrementing_a_filename_without_a_version : With_an_automocked<FileNameDeriver>

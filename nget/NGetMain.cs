@@ -44,8 +44,9 @@ namespace nget
 
         static void ProcessUrl(string url)
         {
+            var urlExpander = Container.GetService<UrlExpander>();
             var downloader = Container.GetService<IFileDownloader>();
-            downloader.DownloadFile(url);
+            downloader.DownloadFile(urlExpander.ExpandUrl(url));
         }
     }
 }

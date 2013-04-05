@@ -1,8 +1,8 @@
-﻿using Machine.Specifications;
+using Machine.Specifications;
 using PS.Utilities.Specs;
 using nget.core.FileName;
 
-namespace nget.specs
+namespace nget.specs.FileNameSpecs
 {
     [Subject(typeof (FileNameDeriver))]
     public class When_deriving_a_filename_from_an_URL : With_an_automocked<FileNameDeriver>
