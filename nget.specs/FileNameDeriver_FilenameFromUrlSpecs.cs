@@ -1,6 +1,5 @@
 ﻿using Machine.Specifications;
 using PS.Utilities.Specs;
-using nget.core;
 using nget.core.FileName;
 
 namespace nget.specs
@@ -18,7 +17,7 @@ namespace nget.specs
         static string fileName;
     }
 
-    [Subject(typeof(FileNameDeriver))]
+    [Subject(typeof (FileNameDeriver))]
     public class When_deriving_a_filename_from_an_URL_with_only_one_slash : With_an_automocked<FileNameDeriver>
     {
         Establish est = () => { url = "http://somesite.com/some_file.ext"; };
@@ -31,7 +30,7 @@ namespace nget.specs
         static string fileName;
     }
 
-    [Subject(typeof(FileNameDeriver))]
+    [Subject(typeof (FileNameDeriver))]
     public class When_deriving_a_filename_from_an_URL_without_an_extension : With_an_automocked<FileNameDeriver>
     {
         Establish est = () => { url = "http://somesite.com/some_file"; };
@@ -43,6 +42,20 @@ namespace nget.specs
         static string url;
         static string fileName;
     }
+
+    [Subject(typeof (FileNameDeriver))]
+    public class When_deriving_a_filename_from_an_URL_with_only_a_host : With_an_automocked<FileNameDeriver>
+    {
+        Establish est = () => { url = "http://somesite.com"; };
+
+        Because of = () => fileName = ClassUnderTest.FilenameFromUrl(url);
+
+        It should_use_the_hostname_sans_dots_as_the_filename = () => fileName.ShouldEqual("somesite_com");
+
+        static string url;
+        static string fileName;
+    }
+
     [Subject(typeof (FileNameDeriver))]
     public class When_deriving_a_filename_from_an_empty_string : With_an_automocked<FileNameDeriver>
     {
@@ -53,7 +66,7 @@ namespace nget.specs
         static string fileName;
     }
 
-    [Subject(typeof(FileNameDeriver))]
+    [Subject(typeof (FileNameDeriver))]
     public class When_deriving_a_filename_from_a_null_string : With_an_automocked<FileNameDeriver>
     {
         Because of = () => fileName = ClassUnderTest.FilenameFromUrl(null);

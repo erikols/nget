@@ -2,7 +2,6 @@
 using Machine.Specifications;
 using Moq;
 using PS.Utilities.Specs;
-using nget.core;
 using nget.core.FileName;
 using nget.core.Fs;
 using nget.core.Web;
@@ -23,8 +22,11 @@ namespace nget.specs
                 mockFilenameDeriver.Setup(x => x.FilenameFromUrl(url)).Returns(fileName);
                 mockFilenameDeriver.Setup(x => x.GetTempFileForTarget(fileName)).Returns(tempFileName);
 
-                mockWebClient = GetTestDouble<INWebClient>();
+                mockWebClient = GetTestDouble<IFetchClient>();
                 mockFileSystem = GetTestDouble<IFileSystem>();
+                GetTestDouble<IFetchClientFactory>()
+                    .Setup(x => x.GetDownloaderForUrl(url))
+                    .Returns(mockWebClient.Object);
             };
 
         Because of = () => ClassUnderTest.DownloadFile(url);
@@ -37,31 +39,34 @@ namespace nget.specs
         static string url;
         static Mock<IFileNameDeriver> mockFilenameDeriver;
         static string fileName;
-        static Mock<INWebClient> mockWebClient;
+        static Mock<IFetchClient> mockWebClient;
         static string tempFileName;
         static Mock<IFileSystem> mockFileSystem;
     }
 
-    [Subject(typeof(FileDownloader))]
+    [Subject(typeof (FileDownloader))]
     public class When_downloading_a_file_with_an_exception : With_an_automocked<FileDownloader>
     {
         Establish context = () =>
-        {
-            url = "http://host/path/file_name.ext";
-            fileName = "file_name.ext";
-            tempFileName = "abc123";
+            {
+                url = "http://host/path/file_name.ext";
+                fileName = "file_name.ext";
+                tempFileName = "abc123";
 
-            mockFilenameDeriver = GetTestDouble<IFileNameDeriver>();
-            mockFilenameDeriver.Setup(x => x.FilenameFromUrl(url)).Returns(fileName);
-            mockFilenameDeriver.Setup(x => x.GetTempFileForTarget(fileName)).Returns(tempFileName);
+                mockFilenameDeriver = GetTestDouble<IFileNameDeriver>();
+                mockFilenameDeriver.Setup(x => x.FilenameFromUrl(url)).Returns(fileName);
+                mockFilenameDeriver.Setup(x => x.GetTempFileForTarget(fileName)).Returns(tempFileName);
 
-            mockWebClient = GetTestDouble<INWebClient>();
-            mockFileSystem = GetTestDouble<IFileSystem>();
+                mockWebClient = GetTestDouble<IFetchClient>();
+                mockFileSystem = GetTestDouble<IFileSystem>();
+                GetTestDouble<IFetchClientFactory>()
+                    .Setup(x => x.GetDownloaderForUrl(url))
+                    .Returns(mockWebClient.Object);
 
-            mockWebClient
-                .Setup(x => x.DownloadUrlToFile(Moq.It.IsAny<string>(), Moq.It.IsAny<string>()))
-                .Throws(new Exception("some error"));
-        };
+                mockWebClient
+                    .Setup(x => x.DownloadUrlToFile(Moq.It.IsAny<string>(), Moq.It.IsAny<string>()))
+                    .Throws(new Exception("some error"));
+            };
 
         Because of = () => exception = Catch.Exception(() => ClassUnderTest.DownloadFile(url));
 
@@ -75,7 +80,7 @@ namespace nget.specs
         static string url;
         static Mock<IFileNameDeriver> mockFilenameDeriver;
         static string fileName;
-        static Mock<INWebClient> mockWebClient;
+        static Mock<IFetchClient> mockWebClient;
         static string tempFileName;
         static Mock<IFileSystem> mockFileSystem;
         static Exception exception;

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -10,22 +11,43 @@ namespace nget.core.FileName
 
         public string FilenameFromUrl(string url)
         {
-            if (null == url)
+            if (string.IsNullOrEmpty(url))
                 return string.Empty;
 
-            var lastSlash = url.LastIndexOf('/');
-            return lastSlash != -1
-                       ? url.Substring(lastSlash + 1)
-                       : string.Empty;
+            var u = new Uri(url);
+            var path = u.PathAndQuery;
+
+            return path == "/"
+                       ? ConvertToFilename(u.Host)
+                       : ExtractFilenameFromPath(path, u);
         }
 
         public string IncrementFileName(string fileName)
         {
             var match = fileNameVersion.Match(fileName);
-            if (match.Success)
-                return IncrementExistingVersion(fileName, match);
+            return match.Success
+                       ? IncrementExistingVersion(fileName, match)
+                       : PatchInVersionNumber(fileName);
+        }
 
-            return PatchInVersionNumber(fileName);
+        public string GetTempFileForTarget(string fileName)
+        {
+            var directoryPortion = Path.GetDirectoryName(fileName) ?? string.Empty;
+            var randomName = Path.GetRandomFileName();
+            return Path.Combine(directoryPortion, randomName);
+        }
+
+        string ExtractFilenameFromPath(string path, Uri u)
+        {
+            var lastSlash = path.LastIndexOf('/');
+            return lastSlash != -1
+                       ? path.Substring(lastSlash + 1)
+                       : ConvertToFilename(u.Host);
+        }
+
+        string ConvertToFilename(string host)
+        {
+            return host.Replace('.', '_');
         }
 
         static string PatchInVersionNumber(string fileName)
@@ -41,13 +63,6 @@ namespace nget.core.FileName
             var version = int.Parse(match.Groups[1].Value) + 1;
             var newVersion = string.Format("({0}).", version);
             return fileNameVersionReplacement.Replace(fileName, newVersion);
-        }
-
-        public string GetTempFileForTarget(string fileName)
-        {
-            var directoryPortion = Path.GetDirectoryName(fileName) ?? string.Empty;
-            var randomName = Path.GetRandomFileName();
-            return Path.Combine(directoryPortion, randomName);
         }
     }
 }

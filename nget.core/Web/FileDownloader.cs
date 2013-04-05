@@ -7,15 +7,15 @@ namespace nget.core.Web
     public class FileDownloader : IFileDownloader
     {
         readonly IFileNameDeriver fileNameDeriver;
-        readonly INWebClient webClient;
+        readonly IFetchClientFactory fetchClientFactory;
         readonly IFileSystem fileSystem;
 
         public FileDownloader(IFileNameDeriver fileNameDeriver,
-                              INWebClient webClient,
+                              IFetchClientFactory fetchClientFactory,
                               IFileSystem fileSystem)
         {
             this.fileNameDeriver = fileNameDeriver;
-            this.webClient = webClient;
+            this.fetchClientFactory = fetchClientFactory;
             this.fileSystem = fileSystem;
         }
 
@@ -27,6 +27,7 @@ namespace nget.core.Web
             var temporaryDownloadFile = fileNameDeriver.GetTempFileForTarget(targetFile);
             try
             {
+                var webClient = fetchClientFactory.GetDownloaderForUrl(url);
                 webClient.DownloadUrlToFile(url, temporaryDownloadFile);
             }
             catch (Exception exception)

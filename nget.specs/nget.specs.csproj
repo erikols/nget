@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.5.16.1, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AWSSDK.1.5.16.1\lib\AWSSDK.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Specifications">
       <HintPath>..\packages\Machine.Specifications.0.5.12\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
@@ -54,12 +58,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CredServicesSpecs\CredentialServicesSpecs.cs" />
     <Compile Include="FileDownloaderSpecs.cs" />
     <Compile Include="FileNameDeriver_FilenameFromUrlSpecs.cs" />
     <Compile Include="FileNameDeriver_GenerateTemporaryFile.cs" />
     <Compile Include="FileNameDeriver_IncrementFileNameSpecs.cs" />
+    <Compile Include="HttpRetryServiceSpecs\When_the_retry_quota_is_reached.cs" />
+    <Compile Include="HttpRetryServiceSpecs\With_an_error_that_should_not_be_retried.cs" />
+    <Compile Include="HttpRetryServiceSpecs\With_a_retry_and_delay_service.cs" />
+    <Compile Include="HttpRetryServiceSpecs\With_a_single_error.cs" />
+    <Compile Include="HttpRetryServiceSpecs\With_a_successful_action.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="S3Specs\S3FetchClientSpecs.cs" />
+    <Compile Include="S3Specs\S3UrlSpecs.cs" />
+    <Compile Include="TestDoubles\FakeFileSystem.cs" />
+    <Compile Include="TestDoubles\FakeStream.cs" />
     <Compile Include="With_an_automocked.cs" />
+    <Compile Include="With_a_FakeFileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nget.core\nget.core.csproj">
