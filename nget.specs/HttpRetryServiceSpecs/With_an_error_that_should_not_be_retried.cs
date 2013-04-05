@@ -29,7 +29,7 @@ namespace nget.specs.HttpRetryServiceSpecs
         It Should_NOT_call_the_DelayService =
             () => mockDelayService.Verify(x => x.Delay(Moq.It.IsAny<int>()), Times.Never());
 
-        It Should_only_invoke_the_action_once = () => timesInvoked.ShouldEqual(1);
+        It Should_only_invoke_the_func_once = () => timesInvoked.ShouldEqual(1);
 
         static Exception exception;
         static int timesInvoked;

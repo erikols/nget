@@ -44,6 +44,28 @@ namespace nget.core.Web
             return result;
         }
 
+        public void WithRetry(Action httpAction)
+        {
+            var attemptsRemaining = MaxAttempts;
+
+            while (true)
+            {
+                if (attemptsRemaining-- <= 0)
+                    break;
+                try
+                {
+                    httpAction();
+                    return;
+                }
+                catch (Exception exception)
+                {
+                    if (ShouldRetry(exception, attemptsRemaining))
+                        continue;
+                    throw;
+                }
+            }
+        }
+
         bool ShouldRetry(Exception exception, int attemptsRemaining)
         {
             if (attemptsRemaining == 0)

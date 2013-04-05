@@ -5,12 +5,19 @@ namespace nget.core.Web
 {
     public class HttpFetchClient : IFetchClient
     {
+        readonly IHttpRetryService httpRetryService;
         const string DefaultUserAgent = "nget/0.1";
+
+        public HttpFetchClient(IHttpRetryService httpRetryService)
+        {
+            this.httpRetryService = httpRetryService;
+        }
 
         public void DownloadUrlToFile(string url, string targetFile)
         {
             var webClient = SetupClient();
-            webClient.DownloadFile(url, targetFile);
+
+            httpRetryService.WithRetry(() => webClient.DownloadFile(url, targetFile));
             Console.Write("\n");
         }
 

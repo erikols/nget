@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Machine.Specifications;
 using Moq;
 using PS.Utilities.Specs;
@@ -7,7 +7,7 @@ using nget.core.Fs;
 using nget.core.Web;
 using It = Machine.Specifications.It;
 
-namespace nget.specs
+namespace nget.specs.DownloaderSpecs
 {
     [Subject(typeof (FileDownloader))]
     public class When_downloading_a_file : With_an_automocked<FileDownloader>
