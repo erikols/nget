@@ -74,7 +74,7 @@ namespace nget.specs.DownloaderSpecs
         It should_derive_a_random_temp_file = () => mockFilenameDeriver.Verify(x => x.GetTempFileForTarget(fileName));
         It should_call_the_web_client_with_a_tempfile = () => mockWebClient.Verify(x => x.DownloadUrlToFile(url, tempFileName));
         It should_NOT_rename_the_file_after_the_download_is_complete = () => mockFileSystem.Verify(x => x.RenameFile(tempFileName, fileName), Times.Never());
-        It should_delete_the_temp_file = () => mockFileSystem.Verify(x => x.DeleteFile(tempFileName));
+        It should_instead_delete_the_temp_file = () => mockFileSystem.Verify(x => x.DeleteFile(tempFileName));
         It should_rethrow_the_exception = () => exception.ShouldNotBeNull();
 
         static string url;

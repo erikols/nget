@@ -65,6 +65,7 @@
     <Compile Include="Utils\ICredentialService.cs" />
     <Compile Include="Utils\IDataProtectionService.cs" />
     <Compile Include="Utils\IDelayService.cs" />
+    <Compile Include="Utils\OptionSet.cs" />
     <Compile Include="Utils\ProtectedAwsCredentials.cs" />
     <Compile Include="Utils\UrlExpander.cs" />
     <Compile Include="Web\FileDownloader.cs" />

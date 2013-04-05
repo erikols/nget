@@ -76,6 +76,7 @@
     <Compile Include="S3Specs\S3UrlSpecs.cs" />
     <Compile Include="TestDoubles\FakeFileSystem.cs" />
     <Compile Include="TestDoubles\FakeStream.cs" />
+    <Compile Include="UtilSpecs\OptionSetSpecs.cs" />
     <Compile Include="UtilSpecs\UrlExpanderSpecs.cs" />
     <Compile Include="With_an_automocked.cs" />
     <Compile Include="With_a_FakeFileSystem.cs" />

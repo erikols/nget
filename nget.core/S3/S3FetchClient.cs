@@ -27,16 +27,21 @@ namespace nget.core.S3
             if (url == null) throw new ArgumentNullException("url");
             if (targetFile == null) throw new ArgumentNullException("targetFile");
 
-            var s3Url = new S3Url(url);
+            var request = SetupGetRequest(new S3Url(url));
+            PerformGetRequest(targetFile, request);
+        }
 
-            var request = new GetObjectRequest
+        static GetObjectRequest SetupGetRequest(S3Url s3Url)
+        {
+            return new GetObjectRequest
                 {
                     BucketName = s3Url.Bucket,
                     Key = s3Url.Key
                 };
+        }
 
-            Console.WriteLine("Key is {0}", request.Key);
-
+        void PerformGetRequest(string targetFile, GetObjectRequest request)
+        {
             using (var response = httpRetryService.WithRetry(() => s3.GetObject(request)))
             {
                 using (var stream = response.ResponseStream)
