@@ -11,6 +11,12 @@ namespace nget
         {
             try
             {
+                if (args.Length == 0)
+                {
+                    ShowUsage();
+                    return;
+                }
+
                 Container.Init();
 
                 if (args.Length == 3)
@@ -29,6 +35,16 @@ namespace nget
             {
                 Console.WriteLine("An error occured: {0}", ex);
             }
+        }
+
+        static void ShowUsage()
+        {
+            Console.WriteLine("Usage:");
+            Console.WriteLine("nget url # download URL to local file");
+            Console.WriteLine("\nS3 Credentials");
+            Console.WriteLine("nget --setCreds s3-access-key s3-secret-key # store credentials");
+            Console.WriteLine("nget --setCreds s3-access-key s3-secret-key # store credentials");
+            Console.WriteLine("Supported schemes: http/https/s3");
         }
 
         static void CreateS3CredFile(string accessKey, string secretKey)

@@ -30,7 +30,7 @@ namespace nget.core.Web
                 var webClient = fetchClientFactory.GetDownloaderForUrl(url);
                 webClient.DownloadUrlToFile(url, temporaryDownloadFile);
             }
-            catch (Exception exception)
+            catch (Exception /* exception */)
             {
                 fileSystem.DeleteFile(temporaryDownloadFile);
                 throw;
